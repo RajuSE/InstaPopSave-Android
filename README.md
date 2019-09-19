@@ -1,6 +1,6 @@
 # 🔖 InstaPopSave-Android
 
- [![](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]() 
+[ ![Download](https://api.bintray.com/packages/rajuse/InstaPopSave-Android/devx.insta.popsave/images/download.svg) ](https://bintray.com/rajuse/InstaPopSave-Android/devx.insta.popsave/_latestVersion) [![](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]() 
 
 <div align="left">
   <sub>Built with ❤︎ by
@@ -12,6 +12,9 @@
 <br/>
 
 Instagram-like save to bookmark popup interaction
+
+![](https://github.com/RajuSE/InstaPopSave-Android/blob/master/shots/PopSave_example.gif)
+
 
 ## 💻 Installation
 Add this in your app's build.gradle file:
