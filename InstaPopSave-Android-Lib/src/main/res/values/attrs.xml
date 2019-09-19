@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="popsave">
+        <attr name="background_color" format="integer"/>
+        <attr name="src_image" format="reference"/>
+    </declare-styleable>
+</resources>
