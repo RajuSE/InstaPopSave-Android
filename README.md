@@ -11,7 +11,8 @@
 </div>
 <br/>
 
-Instagram-like save to bookmark popup interaction
+Instagram-like save to bookmark popup interaction! <br/>
+Screenshot shows how InstaPopSave was used for "Add to wishlist" interaction for CoutLoot app!.
 
 ![](https://github.com/RajuSE/InstaPopSave-Android/blob/master/shots/PopSave_example.gif)
 
