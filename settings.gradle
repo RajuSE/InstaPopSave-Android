@@ -1,2 +1,2 @@
-include ':app', ':InstaPopSave-Android-Lib', ':InstaPopSave-Android-Lib-release_v1'
+include ':app', ':InstaPopSave-Android-Lib'
 rootProject.name='InstaPopOver'
