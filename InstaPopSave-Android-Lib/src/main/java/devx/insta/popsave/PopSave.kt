@@ -51,7 +51,7 @@ class PopSave
                     getResourceId(R.styleable.popsave_src_image, R.color.c2_light2_grey)
             }
 
-            setPopperRootsize(0, 250)
+            setPopperAreaSize(0, 250)
             setPopperSize(140, 140)
 
             imageView?.setImageDrawable(ContextCompat.getDrawable(context,src_image))
@@ -85,7 +85,7 @@ class PopSave
         return this
     }
 
-    fun setPopperRootsize(width: Int, height: Int): PopSave {
+    fun setPopperAreaSize(width: Int, height: Int): PopSave {
         if (height > 0)
             defaultPopperRootHeight = height
         if (width > 0)
