@@ -12,16 +12,18 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.top_bar_home.*
 
 class MainActivity : AppCompatActivity() {
-
+    var isDebug = true
     var counter = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         popSave
             .setPopperImage(R.drawable.bags)//For local image.  For Remote image Use: "popSave?.imageView" and handle I/O
-//            .setPopperRootsize(0, 250)
+            .setPopperAreaSize(0, 500)
             .setPopperSize(130, 130)
+            .shouldMoveUp()
             .setOnFinishListener(object : PopSave.OnFinish {
                 override fun onFinish() {
 
@@ -38,6 +40,17 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             popSave.popNow()
+        }
+
+        button2.setOnClickListener {
+            popSave.highlightAreaToDebug(isDebug)
+            if (isDebug == false) {
+                button2.setText("Release")
+                isDebug = true
+            } else {
+                button2.setText("Debug")
+                isDebug = false
+            }
         }
 
     }

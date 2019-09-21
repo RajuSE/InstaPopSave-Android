@@ -7,5 +7,7 @@
     <color name="c2_light33_grey">#ECECEC</color>
     <color name="c2_light_red">#ff3651</color>
     <color name="c2_dark1_grey">#c4c4c4</color>
+    <color name="green_debug">#2C54CA59</color>
     <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
 </resources>

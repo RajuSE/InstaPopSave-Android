@@ -1,15 +1,18 @@
 package devx.insta.popsave
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
@@ -30,6 +33,7 @@ class PopSave
     private var defaultPopperWidth = ViewGroup.LayoutParams.WRAP_CONTENT
     private var defaultPopperRootHeight = 250
     private var defaultPopperRootWidth = ViewGroup.LayoutParams.WRAP_CONTENT
+    private var shouldMoveDown = false
 
     init {
         init(context, attrs)
@@ -54,13 +58,17 @@ class PopSave
             setPopperAreaSize(0, 250)
             setPopperSize(140, 140)
 
-            imageView?.setImageDrawable(ContextCompat.getDrawable(context,src_image))
+            imageView?.setImageDrawable(ContextCompat.getDrawable(context, src_image))
 
             imageView?.setOnClickListener {
                 onViewClickListener?.onViewClicked()
-
             }
         }
+    }
+
+    fun setPopperCornerRadius(radius:Float): PopSave {
+        imageView?.setImageDrawable(ContextCompat.getDrawable(context, src_image))
+        return this
     }
 
 
@@ -110,6 +118,14 @@ class PopSave
         return this
     }
 
+    fun highlightAreaToDebug(isDebug: Boolean = false) {
+        if (isDebug) {
+            popSaveRoot?.setBackgroundColor(ContextCompat.getColor(context, R.color.green_debug))
+        } else {
+            popSaveRoot?.setBackgroundColor(ContextCompat.getColor(context, R.color.transparent))
+        }
+    }
+
     fun popNow() {
         imageView?.let {
             imageView!!.visibility = View.VISIBLE
@@ -128,24 +144,45 @@ class PopSave
         }
     }
 
+
+    fun shouldMoveDown(): PopSave {
+        shouldMoveDown = true
+        return this
+    }
+
+    private fun setupPopperGravity() {
+        var layoutParams = LinearLayout.LayoutParams(defaultPopperWidth, defaultPopperHeight)
+        layoutParams.gravity = if (shouldMoveDown) Gravity.TOP else Gravity.BOTTOM
+        imageView?.layoutParams
+        imageView?.requestLayout()
+        requestLayout()
+    }
+
+
+    fun shouldMoveUp(): PopSave {
+        shouldMoveDown = false
+        return this
+    }
+
     //animations
     private fun slideUpImageAnimation() {
-
-        val animation = AnimationUtils.loadAnimation(context, R.anim.slide_up)
-        animation.interpolator = AccelerateDecelerateInterpolator()
-        animation.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationStart(animation: Animation) {
+        if (true) {
+            imageView?.let {
+                imageView!!.animate()
+                    .setInterpolator(AccelerateDecelerateInterpolator())
+                    .translationY(if (shouldMoveDown) defaultPopperRootHeight.toFloat() else -defaultPopperRootHeight.toFloat())
+                    .setListener(object : AnimatorListenerAdapter() {
+                        override fun onAnimationEnd(animation: Animator) {
+                            super.onAnimationEnd(animation)
+                            imageView?.visibility = View.GONE
+                            popSaveRoot?.visibility = View.GONE
+                            onFinish?.onFinish()
+                            imageView?.animate()?.translationY(0.toFloat())?.setListener(null)
+                        }
+                    })
             }
-
-            override fun onAnimationEnd(animation: Animation) {
-                imageView?.visibility = View.GONE
-                popSaveRoot?.visibility = View.GONE
-                onFinish?.onFinish()
-            }
-
-            override fun onAnimationRepeat(animation: Animation) {}
-        })
-        imageView?.startAnimation(animation)
+            return
+        }
     }
 
 
@@ -153,10 +190,10 @@ class PopSave
         fun onFinish()
     }
 
-    var onFinish:OnFinish ?=null
+    var onFinish: OnFinish? = null
 
-    fun setOnFinishListener(onFinish: OnFinish):PopSave {
-        this.onFinish=onFinish
+    fun setOnFinishListener(onFinish: OnFinish): PopSave {
+        this.onFinish = onFinish
         return this
     }
 
