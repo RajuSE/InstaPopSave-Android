@@ -1,6 +1,6 @@
 # 🔖 InstaPopSave-Android
 
- [![](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]() 
+[ ![Download](https://api.bintray.com/packages/rajuse/InstaPopSave-Android/devx.insta.popsave/images/download.svg) ](https://bintray.com/rajuse/InstaPopSave-Android/devx.insta.popsave/_latestVersion) [![](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]() 
 
 <div align="left">
   <sub>Built with ❤︎ by
@@ -11,7 +11,11 @@
 </div>
 <br/>
 
-Instagram-like save to bookmark popup interaction
+The Instagram's effect of Pop & Save a post! <br/>
+Screenshot shows how InstaPopSave was used for "Add to wishlist" interaction for CoutLoot app!.
+
+![](https://github.com/RajuSE/InstaPopSave-Android/blob/master/shots/PopSave_example.gif)
+
 
 ## 💻 Installation
 Add this in your app's build.gradle file:
@@ -41,6 +45,9 @@ Changes exist in the [releases](https://github.com/RajuSE/InstaPopSave-Android/r
 Raju Ugale
 ```
 - Website (http://rajuse.github.io)
+
+# New upcoming features
+There are tons of features that can be implemented. This library is in an early stage of development. Let's work on it together!
 
 # 👍 How to Contribute
 1. Fork it
