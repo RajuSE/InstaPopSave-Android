@@ -66,14 +66,7 @@ class PopSave
         }
     }
 
-    fun setPopperCornerRadius(radius:Float): PopSave {
-        imageView?.setImageDrawable(ContextCompat.getDrawable(context, src_image))
-        return this
-    }
-
-
     var onViewClickListener: OnViewClicked? = null
-
 
     interface OnViewClicked {
         fun onViewClicked()
@@ -142,26 +135,6 @@ class PopSave
                 }
             })
         }
-    }
-
-
-    fun shouldMoveDown(): PopSave {
-        shouldMoveDown = true
-        return this
-    }
-
-    private fun setupPopperGravity() {
-        var layoutParams = LinearLayout.LayoutParams(defaultPopperWidth, defaultPopperHeight)
-        layoutParams.gravity = if (shouldMoveDown) Gravity.TOP else Gravity.BOTTOM
-        imageView?.layoutParams
-        imageView?.requestLayout()
-        requestLayout()
-    }
-
-
-    fun shouldMoveUp(): PopSave {
-        shouldMoveDown = false
-        return this
     }
 
     //animations

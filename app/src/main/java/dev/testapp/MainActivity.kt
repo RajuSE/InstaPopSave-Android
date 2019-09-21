@@ -21,9 +21,8 @@ class MainActivity : AppCompatActivity() {
 
         popSave
             .setPopperImage(R.drawable.bags)//For local image.  For Remote image Use: "popSave?.imageView" and handle I/O
-            .setPopperAreaSize(0, 500)
+//            .setPopperAreaSize(0, 500)
             .setPopperSize(130, 130)
-            .shouldMoveUp()
             .setOnFinishListener(object : PopSave.OnFinish {
                 override fun onFinish() {
 
