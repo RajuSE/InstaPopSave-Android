@@ -15,6 +15,8 @@ class MainActivity : AppCompatActivity() {
     var isDebug = true
     var counter = 0
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
