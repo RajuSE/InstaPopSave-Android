@@ -6,6 +6,7 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 
 public class PopSaveAnimUtils {
+
     protected static void pop(final View v, Animation.AnimationListener listener) {
         v.setVisibility(View.VISIBLE);
         Animation anim = new ScaleAnimation(
