@@ -39,6 +39,12 @@ Or add PopSave as a new dependency inside your pom.xml
 ## ✔️ Changelog
 Changes exist in the [releases](https://github.com/RajuSE/InstaPopSave-Android/releases) tab.
 
+
+## 🦀Issues
+Contribute by notifying issues and suggestions 
+https://github.com/RajuSE/InstaPopSave-Android/issues
+
+
 ## 👨 Developed By
 
 ```
