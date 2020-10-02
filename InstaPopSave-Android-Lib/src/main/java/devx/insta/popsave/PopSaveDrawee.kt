@@ -4,30 +4,36 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Handler
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
-import android.widget.ImageView
 import android.widget.RelativeLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
+import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.drawee.generic.RoundingParams
+import com.facebook.drawee.view.SimpleDraweeView
+import com.facebook.imagepipeline.common.ResizeOptions
+import com.facebook.imagepipeline.request.ImageRequestBuilder
 
-class PopSave @JvmOverloads constructor(
+class PopSaveDrawee @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : RelativeLayout(context, attrs, defStyleAttr) {
 
     //Views
-    var imageView: ImageView? = null
+    var simpleDraweeView: SimpleDraweeView? = null
     var popSaveRoot: CoordinatorLayout? = null
+    var onFinish: OnFinish? = null
 
     //Configs
     private var src_image: Int = R.color.c2_light2_grey
+    private var roundedCornerRadius: Int = 10
     private var defaultBackgroundColor: Int = R.color.c2_light2_grey
     private var defaultPopperHeight = ViewGroup.LayoutParams.WRAP_CONTENT
     private var defaultPopperWidth = ViewGroup.LayoutParams.WRAP_CONTENT
@@ -42,8 +48,9 @@ class PopSave @JvmOverloads constructor(
 
     private fun init(context: Context, attributes: AttributeSet?) {
         attributes?.let { _ ->
+            Fresco.initialize(context)
             inflate(context, R.layout.layout_popsave_drawee, this)
-            imageView = findViewById(R.id.myImageView)
+            simpleDraweeView = findViewById(R.id.frescoImageView)
             popSaveRoot = findViewById(R.id.popSaveRoot)
 
             val typedArray = context.obtainStyledAttributes(attributes, R.styleable.popsave, 0, 0)
@@ -57,9 +64,10 @@ class PopSave @JvmOverloads constructor(
             setPopperAreaSize(0, 250)
             setPopperSize(140, 140)
 
-            imageView?.setImageDrawable(ContextCompat.getDrawable(context, src_image))
+            simpleDraweeView?.setImageDrawable(ContextCompat.getDrawable(context, src_image))
 
-            imageView?.setOnClickListener {
+
+            simpleDraweeView?.setOnClickListener {
                 onViewClickListener?.onViewClicked()
             }
         }
@@ -72,20 +80,16 @@ class PopSave @JvmOverloads constructor(
     }
 
     //config methods
-    fun setPopperSize(width: Int, height: Int): PopSave {
-        if (height > 0)
-            defaultPopperHeight = height
-        if (width > 0)
-            defaultPopperWidth = width
-        imageView?.layoutParams?.height = defaultPopperHeight
-        imageView?.layoutParams?.width = defaultPopperWidth
-
-        imageView?.requestLayout()
-
+    fun setPopperSize(width: Int, height: Int): PopSaveDrawee {
+        if (height > 0) defaultPopperHeight = height
+        if (width > 0) defaultPopperWidth = width
+        simpleDraweeView?.layoutParams?.height = defaultPopperHeight
+        simpleDraweeView?.layoutParams?.width = defaultPopperWidth
+        simpleDraweeView?.requestLayout()
         return this
     }
 
-    fun setPopperAreaSize(width: Int, height: Int): PopSave {
+    fun setPopperAreaSize(width: Int, height: Int): PopSaveDrawee {
         if (height > 0) defaultPopperRootHeight = height
         if (width > 0) defaultPopperRootWidth = width
 
@@ -95,7 +99,7 @@ class PopSave @JvmOverloads constructor(
         return this
     }
 
-    fun setPopperImage(resource: Any): PopSave {
+    fun setPopperImage(resource: Any): PopSaveDrawee {
         return when (resource) {
             is String -> {
                 imageUrl = resource
@@ -139,15 +143,16 @@ class PopSave @JvmOverloads constructor(
     }
 
     fun popNow() {
-        Glide.with(this)
-            .load(getImageResource())
-            .into(imageView!!)
+        simpleDraweeView.loadImage(imageUrl, 100, 100, true, 20)
 
-        imageView?.let {
-            imageView!!.visibility = View.VISIBLE
+//        Glide.with(this)
+//            .load(getImageResource())
+//            .into(simpleDraweeView!!)
+
+        simpleDraweeView?.let {
+            simpleDraweeView!!.visibility = View.VISIBLE
             popSaveRoot!!.visibility = View.VISIBLE
-
-            PopSaveAnimUtils.pop(imageView, object : Animation.AnimationListener {
+            PopSaveAnimUtils.pop(simpleDraweeView, object : Animation.AnimationListener {
                 override fun onAnimationStart(animation: Animation) {}
                 override fun onAnimationRepeat(animation: Animation) {}
                 override fun onAnimationEnd(animation: Animation) {
@@ -160,17 +165,18 @@ class PopSave @JvmOverloads constructor(
     //animations
     private fun slideUpImageAnimation() {
         if (true) {
-            imageView?.let {
-                imageView!!.animate()
+            simpleDraweeView?.let {
+                simpleDraweeView!!.animate()
                     .setInterpolator(AccelerateDecelerateInterpolator())
                     .translationY(if (shouldMoveDown) defaultPopperRootHeight.toFloat() else -defaultPopperRootHeight.toFloat())
                     .setListener(object : AnimatorListenerAdapter() {
                         override fun onAnimationEnd(animation: Animator) {
                             super.onAnimationEnd(animation)
-                            imageView?.visibility = View.GONE
+                            simpleDraweeView?.visibility = View.GONE
                             popSaveRoot?.visibility = View.GONE
                             onFinish?.onFinish()
-                            imageView?.animate()?.translationY(0.toFloat())?.setListener(null)
+                            simpleDraweeView?.animate()?.translationY(0.toFloat())
+                                ?.setListener(null)
                         }
                     })
             }
@@ -178,16 +184,47 @@ class PopSave @JvmOverloads constructor(
         }
     }
 
-
     interface OnFinish {
         fun onFinish()
     }
 
-    var onFinish: OnFinish? = null
-
-    fun setOnFinishListener(onFinish: OnFinish): PopSave {
+    fun setOnFinishListener(onFinish: OnFinish): PopSaveDrawee {
         this.onFinish = onFinish
         return this
     }
 
+}
+
+fun SimpleDraweeView?.loadImage(
+    imageUrl: String,
+    width: Int = 100,
+    height: Int = 100,
+    hasPlaceHolder: Boolean = false,
+    cornerRadious: Int
+) {
+    val imageRequest = ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageUrl))
+        .setResizeOptions(ResizeOptions(width, height))
+        .build()
+
+    val controller = Fresco.newDraweeControllerBuilder()
+        .setImageRequest(imageRequest)
+        .setOldController(this@loadImage?.controller)
+        .build()
+
+    if (cornerRadious > 0) {
+        val floatArray = floatArrayOf(cornerRadious.toFloat(), cornerRadious.toFloat(), cornerRadious.toFloat(), cornerRadious.toFloat(),
+            cornerRadious.toFloat(), cornerRadious.toFloat(), cornerRadious.toFloat(), cornerRadious.toFloat())
+
+        val roundParam = RoundingParams.fromCornersRadii(floatArray)
+        this@loadImage?.hierarchy?.roundingParams = roundParam
+    }
+
+//    if (hasPlaceHolder)
+//        this@loadImage?.hierarchy?.setPlaceholderImage(
+//            ContextCompat.getColor(
+//                context,
+//                R.color.c2_light2_grey
+//            )
+//        )
+    this@loadImage?.controller = controller
 }

@@ -29,11 +29,11 @@
         android:id="@+id/mainImage"
         android:layout_width="match_parent"
         android:layout_height="260dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bags"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="50dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bags"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -44,8 +44,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:text="Packing Cubes/Travel Pouch/Travel Organizer - Small, \nMedium, Large, and Slim, Grey"
-        android:textColor="#000"
         android:textAlignment="textStart"
+        android:textColor="#000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mainImage" />
 
@@ -71,7 +71,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
-    <devx.insta.popsave.PopSave
+    <Button
+        android:id="@+id/loadFromButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Load From Url"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button2" />
+
+    <devx.insta.popsave.PopSaveDrawee
         android:id="@+id/popSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

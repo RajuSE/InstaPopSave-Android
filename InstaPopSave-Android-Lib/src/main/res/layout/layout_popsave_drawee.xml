@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:id="@+id/popSaveRoot"
     android:layout_width="wrap_content"
     android:layout_height="240dp"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/myImageView"
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/frescoImageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
@@ -15,8 +16,10 @@
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
         android:visibility="gone"
-        tools:background="@color/c2_light33_grey"
+        tools:visibility="visible"
         tools:src="@tools:sample/avatars"
-        tools:visibility="visible" />
+        fresco:roundedCornerRadius="10dp"
+        fresco:placeholderImage="@color/c2_dark1_grey"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

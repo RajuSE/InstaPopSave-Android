@@ -3,5 +3,6 @@
     <declare-styleable name="popsave">
         <attr name="background_color" format="integer"/>
         <attr name="src_image" format="reference"/>
+        <attr name="roundedCornerRadius" format="dimension"/>
     </declare-styleable>
 </resources>
