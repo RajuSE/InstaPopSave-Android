@@ -29,8 +29,8 @@ class PopSaveDrawee
     //Configs
     private var srcImage: Int = R.color.c2_light_red
     private var defaultBackgroundColor: Int = R.color.c2_light2_grey
-    private var defaultPopperHeight = 100
-    private var defaultPopperWidth = 100
+    private var defaultPopperHeight = ViewGroup.LayoutParams.WRAP_CONTENT
+    private var defaultPopperWidth = ViewGroup.LayoutParams.WRAP_CONTENT
     private var defaultPopperRootHeight = 250
     private var defaultPopperRootWidth = ViewGroup.LayoutParams.WRAP_CONTENT
     private var shouldMoveDown = false
@@ -43,7 +43,6 @@ class PopSaveDrawee
     private fun init(context: Context, attributes: AttributeSet?) {
         attributes?.let { _ ->
 
-            //            Fresco.initialize(context)
             inflate(context, R.layout.layout_popsave_drawee, this)
             simpleDraweeView = findViewById(R.id.frescoImageView)
             simpleDraweeView?.visibility = View.GONE
@@ -58,13 +57,11 @@ class PopSaveDrawee
             }
 
             setPopperAreaSize(0, 250)
-//            setPopperSize(140, 140)
+            setPopperSize(140, 140)
 
-//            frescoImageView?.setImageDrawable(ContextCompat.getDrawable(context, srcImage))
-
-//            frescoImageView?.setOnClickListener {
-//                onViewClickListener?.onViewClicked()
-//            }
+            simpleDraweeView?.setOnClickListener {
+                onViewClickListener?.onViewClicked()
+            }
         }
     }
 

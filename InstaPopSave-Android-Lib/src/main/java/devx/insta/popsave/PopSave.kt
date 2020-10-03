@@ -44,6 +44,8 @@ class PopSave
 
             inflate(context, R.layout.layout_popsave, this)
             imageView = findViewById(R.id.myImageView)
+            imageView?.visibility = View.GONE
+
             popSaveRoot = findViewById(R.id.popSaveRoot)
 
             val typedArray = context.obtainStyledAttributes(attributes, R.styleable.popsave, 0, 0)
