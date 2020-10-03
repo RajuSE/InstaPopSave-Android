@@ -17,8 +17,8 @@ fun SimpleDraweeView?.loadImage(imageUrl: String, width: Int = 100, height: Int 
         .setTapToRetryEnabled(tapToRetry)
         .build()
     if (hasPlaceHolder) {
-        this@loadImage?.hierarchy?.setPlaceholderImage(R.color.violet)
-        this@loadImage?.hierarchy?.setFailureImage(R.color.blue)
+        this@loadImage?.hierarchy?.setPlaceholderImage(R.color.c2_light2_grey)
+        this@loadImage?.hierarchy?.setFailureImage(R.color.c2_light2_grey)
     }
     this@loadImage?.controller = controller
 }

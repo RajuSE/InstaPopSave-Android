@@ -4,7 +4,6 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.os.Handler
 import android.util.AttributeSet
 import android.view.Gravity
@@ -16,11 +15,7 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
-import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
-import com.facebook.drawee.view.DraweeHolder
-
-
 
 
 class PopSaveDrawee
@@ -28,7 +23,7 @@ class PopSaveDrawee
     RelativeLayout(context, attrs, defStyleAttr) {
 
     //Views
-    var frescoImageView: SimpleDraweeView? = null
+    var simpleDraweeView: SimpleDraweeView? = null
     var popSaveRoot: CoordinatorLayout? = null
 
     //Configs
@@ -48,9 +43,10 @@ class PopSaveDrawee
     private fun init(context: Context, attributes: AttributeSet?) {
         attributes?.let { _ ->
 
-//            Fresco.initialize(context)
+            //            Fresco.initialize(context)
             inflate(context, R.layout.layout_popsave_drawee, this)
-            frescoImageView = findViewById(R.id.frescoImageView)
+            simpleDraweeView = findViewById(R.id.frescoImageView)
+            simpleDraweeView?.visibility = View.GONE
             popSaveRoot = findViewById(R.id.popSaveRoot)
 
             val typedArray = context.obtainStyledAttributes(attributes, R.styleable.popsave, 0, 0)
@@ -73,7 +69,7 @@ class PopSaveDrawee
     }
 
     fun setPopperCornerRadius(radius: Float): PopSaveDrawee {
-        frescoImageView?.setImageDrawable(ContextCompat.getDrawable(context, srcImage))
+        simpleDraweeView?.setImageDrawable(ContextCompat.getDrawable(context, srcImage))
         return this
     }
 
@@ -91,10 +87,10 @@ class PopSaveDrawee
             defaultPopperHeight = height
         if (width > 0)
             defaultPopperWidth = width
-        frescoImageView?.layoutParams?.height = defaultPopperHeight
-        frescoImageView?.layoutParams?.width = defaultPopperWidth
+        simpleDraweeView?.layoutParams?.height = defaultPopperHeight
+        simpleDraweeView?.layoutParams?.width = defaultPopperWidth
 
-        frescoImageView?.requestLayout()
+        simpleDraweeView?.requestLayout()
 
         return this
     }
@@ -113,12 +109,12 @@ class PopSaveDrawee
     }
 
     fun setPopperImage(drawable: Drawable): PopSaveDrawee {
-        frescoImageView?.setImageDrawable(drawable)
+        simpleDraweeView?.setImageDrawable(drawable)
         return this
     }
 
     fun setPopperImage(resId: Int): PopSaveDrawee {
-        frescoImageView?.setImageDrawable(
+        simpleDraweeView?.setImageDrawable(
             ContextCompat.getDrawable(context, resId)
         )
         return this
@@ -133,26 +129,22 @@ class PopSaveDrawee
     }
 
     fun popNow() {
-        frescoImageView?.let {
-            frescoImageView!!.visibility = View.VISIBLE
-            popSaveRoot!!.visibility = View.VISIBLE
-            loadImage("http://www.winterquilts.com/wp-content/uploads/2016/11/packing.png")
+        simpleDraweeView!!.visibility = View.VISIBLE
+        popSaveRoot!!.visibility = View.VISIBLE
 
-            if(true) return
-            PopSaveAnimUtils.pop(frescoImageView, object : Animation.AnimationListener {
-                override fun onAnimationStart(animation: Animation) {}
+        PopSaveAnimUtils.pop(simpleDraweeView, object : Animation.AnimationListener {
+            override fun onAnimationStart(animation: Animation) {}
 
-                override fun onAnimationEnd(animation: Animation) {
-                    Handler().postDelayed({ slideUpImageAnimation() }, 300)
-                }
+            override fun onAnimationEnd(animation: Animation) {
+                Handler().postDelayed({ slideUpImageAnimation() }, 300)
+            }
 
-                override fun onAnimationRepeat(animation: Animation) {
-                }
-            })
-        }
+            override fun onAnimationRepeat(animation: Animation) {
+            }
+        })
     }
 
-    fun shouldMoveDown(): PopSaveDrawee {
+    private fun shouldMoveDown(): PopSaveDrawee {
         shouldMoveDown = true
         return this
     }
@@ -160,36 +152,39 @@ class PopSaveDrawee
     private fun setupPopperGravity() {
         val layoutParams = LinearLayout.LayoutParams(defaultPopperWidth, defaultPopperHeight)
         layoutParams.gravity = if (shouldMoveDown) Gravity.TOP else Gravity.BOTTOM
-        frescoImageView?.layoutParams
-        frescoImageView?.requestLayout()
+        simpleDraweeView?.layoutParams
+        simpleDraweeView?.requestLayout()
         requestLayout()
     }
 
-    fun loadImage(imageUrl: String, resizeWidth: Int = 100, resizeHeight: Int = 100):PopSaveDrawee{
-        frescoImageView?.loadImage(imageUrl, resizeWidth, resizeHeight)
-        frescoImageView?.requestLayout()
+    fun loadImage(
+        imageUrl: String,
+        resizeWidth: Int = 100,
+        resizeHeight: Int = 100
+    ): PopSaveDrawee {
+        simpleDraweeView?.loadImage(imageUrl, resizeWidth, resizeHeight)
+        simpleDraweeView?.requestLayout()
         return this
     }
 
-    fun shouldMoveUp(): PopSaveDrawee {
+    private fun shouldMoveUp(): PopSaveDrawee {
         shouldMoveDown = false
         return this
     }
 
     //animations
     private fun slideUpImageAnimation() {
-        if(true)return
-        frescoImageView?.let {
-            frescoImageView!!.animate()
+        simpleDraweeView?.let {
+            simpleDraweeView!!.animate()
                 .setInterpolator(AccelerateDecelerateInterpolator())
                 .translationY(if (shouldMoveDown) defaultPopperRootHeight.toFloat() else -defaultPopperRootHeight.toFloat())
                 .setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator) {
                         super.onAnimationEnd(animation)
-                        frescoImageView?.visibility = View.GONE
+                        simpleDraweeView?.visibility = View.GONE
                         popSaveRoot?.visibility = View.GONE
                         onFinish?.onFinish()
-                        frescoImageView?.animate()?.translationY(0.toFloat())?.setListener(null)
+                        simpleDraweeView?.animate()?.translationY(0.toFloat())?.setListener(null)
                     }
                 })
         }
