@@ -5,11 +5,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.imagepipeline.common.ResizeOptions
+import com.facebook.imagepipeline.request.ImageRequestBuilder
 import com.google.android.material.snackbar.Snackbar
 import dev.android.R
-import devx.insta.popsave.PopSave
-import devx.insta.popsave.PopSaveAnimUtils
-import devx.insta.popsave.PopSaveDrawee
+import devx.insta.popsave.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.top_bar_home.*
 
@@ -23,15 +24,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        val imageUri1 = Uri.parse("https://raw.githubusercontent.com/facebook/fresco/master/docs/static/logo.png")
-//        mainImage1?.setImageURI(imageUri1)
-
         popSaveDrawee
-            .setPopperImage(R.drawable.bags)//For local image.  For Remote image Use: "popSave?.imageView" and handle I/O
-            .setPopperAreaSize(0, 500)
-            .setPopperSize(130, 130)
+//            .setPopperImage(R.drawable.bags)//For local image.  For Remote image Use: "popSave?.imageView" and handle I/O
+//            .setPopperAreaSize(0, 500)
+//            .setPopperSize(130, 130)
             .shouldMoveUp()
-//            .loadImage("https://raw.githubusercontent.com/facebook/fresco/master/docs/static/logo.png")
+//            .loadImage("http://raw.githubusercontent.com/RajuSE/InstaPopSave-Android/master/app/src/main/res/drawable/bags.jpg")
             .setOnFinishListener(object : PopSaveDrawee.OnFinish {
                 override fun onFinish() {
 
@@ -46,11 +44,32 @@ class MainActivity : AppCompatActivity() {
                 }
             })
 
-//        val imageUri = Uri.parse("https://raw.githubusercontent.com/facebook/fresco/master/docs/static/logo.png")
-//        popSave.frescoImageView?.setImageURI(imageUri)
+        var imageUrl="http://www.winterquilts.com/wp-content/uploads/2016/11/packing.png"
 
         button.setOnClickListener {
-            popSaveDrawee.popNow()
+//            popSaveDrawee.popNow()
+            popSaveDrawee?.frescoImageView.loadImage(imageUrl)//"http://raw.githubusercontent.com/RajuSE/InstaPopSave-Android/master/app/src/main/res/drawable/bags.jpg")
+
+            val imageRequest = ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageUrl))
+//                .setResizeOptions(ResizeOptions(100, 100))
+                .build()
+
+//            popSaveDrawee?.frescoImageView?.setImageRequest(imageRequest)
+
+            /*val controller = Fresco.newDraweeControllerBuilder()
+                .setImageRequest(imageRequest)
+                .setOldController(popSaveDrawee?.frescoImageView?.controller)
+                .setTapToRetryEnabled(true)
+                .build()*/
+
+//            popSaveDrawee?.frescoImageView?.hierarchy?.setProgressBarImage(CircleProgressBarDrawable(this, 45 , false ))
+
+//            if (true) {
+//                popSaveDrawee?.frescoImageView?.hierarchy?.setPlaceholderImage(devx.insta.popsave.R.color.violet)
+//                popSaveDrawee?.frescoImageView?.hierarchy?.setFailureImage(devx.insta.popsave.R.color.blue)
+//            }
+//            popSaveDrawee?.frescoImageView?.controller = controller
+
         }
 
         button2.setOnClickListener {

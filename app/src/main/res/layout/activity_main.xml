@@ -31,37 +31,25 @@
         android:layout_height="260dp"
         android:scaleType="centerCrop"
         android:src="@drawable/bags"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:layout_marginBottom="50dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/mainImage1"
-        android:layout_width="match_parent"
-        android:layout_height="260dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bags"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
         android:text="Packing Cubes/Travel Pouch/Travel Organizer - Small, \nMedium, Large, and Slim, Grey"
-        android:textColor="#000"
         android:textAlignment="textStart"
+        android:textColor="#000"
+        android:layout_margin="15dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainImage" />
+        app:layout_constraintTop_toBottomOf="@+id/mainImage" />
 
     <Button
         android:id="@+id/button"

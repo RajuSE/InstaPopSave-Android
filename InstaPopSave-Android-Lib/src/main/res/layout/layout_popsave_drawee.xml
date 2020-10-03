@@ -9,13 +9,13 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/frescoImageView"
-        android:layout_width="100dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_gravity="bottom|center_horizontal"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:visibility="gone"
+        android:visibility="visible"
         tools:visibility="visible"
         tools:src="@tools:sample/avatars"
         fresco:roundedCornerRadius="10dp"

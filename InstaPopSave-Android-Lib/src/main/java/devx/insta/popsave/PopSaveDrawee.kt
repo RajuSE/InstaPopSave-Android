@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Handler
 import android.util.AttributeSet
 import android.view.Gravity
@@ -17,6 +18,9 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
+import com.facebook.drawee.view.DraweeHolder
+
+
 
 
 class PopSaveDrawee
@@ -28,10 +32,10 @@ class PopSaveDrawee
     var popSaveRoot: CoordinatorLayout? = null
 
     //Configs
-    private var srcImage: Int = R.color.c2_light2_grey
+    private var srcImage: Int = R.color.c2_light_red
     private var defaultBackgroundColor: Int = R.color.c2_light2_grey
-    private var defaultPopperHeight = ViewGroup.LayoutParams.WRAP_CONTENT
-    private var defaultPopperWidth = ViewGroup.LayoutParams.WRAP_CONTENT
+    private var defaultPopperHeight = 100
+    private var defaultPopperWidth = 100
     private var defaultPopperRootHeight = 250
     private var defaultPopperRootWidth = ViewGroup.LayoutParams.WRAP_CONTENT
     private var shouldMoveDown = false
@@ -44,7 +48,7 @@ class PopSaveDrawee
     private fun init(context: Context, attributes: AttributeSet?) {
         attributes?.let { _ ->
 
-            Fresco.initialize(context)
+//            Fresco.initialize(context)
             inflate(context, R.layout.layout_popsave_drawee, this)
             frescoImageView = findViewById(R.id.frescoImageView)
             popSaveRoot = findViewById(R.id.popSaveRoot)
@@ -58,13 +62,13 @@ class PopSaveDrawee
             }
 
             setPopperAreaSize(0, 250)
-            setPopperSize(140, 140)
+//            setPopperSize(140, 140)
 
-            frescoImageView?.setImageDrawable(ContextCompat.getDrawable(context, srcImage))
+//            frescoImageView?.setImageDrawable(ContextCompat.getDrawable(context, srcImage))
 
-            frescoImageView?.setOnClickListener {
-                onViewClickListener?.onViewClicked()
-            }
+//            frescoImageView?.setOnClickListener {
+//                onViewClickListener?.onViewClicked()
+//            }
         }
     }
 
@@ -132,7 +136,9 @@ class PopSaveDrawee
         frescoImageView?.let {
             frescoImageView!!.visibility = View.VISIBLE
             popSaveRoot!!.visibility = View.VISIBLE
+            loadImage("http://www.winterquilts.com/wp-content/uploads/2016/11/packing.png")
 
+            if(true) return
             PopSaveAnimUtils.pop(frescoImageView, object : Animation.AnimationListener {
                 override fun onAnimationStart(animation: Animation) {}
 
@@ -160,7 +166,8 @@ class PopSaveDrawee
     }
 
     fun loadImage(imageUrl: String, resizeWidth: Int = 100, resizeHeight: Int = 100):PopSaveDrawee{
-        frescoImageView.loadImage(imageUrl, resizeWidth, resizeHeight)
+        frescoImageView?.loadImage(imageUrl, resizeWidth, resizeHeight)
+        frescoImageView?.requestLayout()
         return this
     }
 
@@ -171,6 +178,7 @@ class PopSaveDrawee
 
     //animations
     private fun slideUpImageAnimation() {
+        if(true)return
         frescoImageView?.let {
             frescoImageView!!.animate()
                 .setInterpolator(AccelerateDecelerateInterpolator())
