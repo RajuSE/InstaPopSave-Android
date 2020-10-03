@@ -4,6 +4,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 //apply plugin: 'maven-publish'
 
 ext {
@@ -11,7 +13,7 @@ ext {
 
     PUBLISH_GROUP_ID = 'devx.insta.popsave'
     PUBLISH_ARTIFACT_ID = 'InstaPopSave-Android'
-    PUBLISH_VERSION = '1.0.0'
+    PUBLISH_VERSION = '1.1.1'
 }
 
 /*
@@ -62,6 +64,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.facebook.fresco:fresco:2.0.0'
     implementation 'androidx.core:core-ktx:1.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

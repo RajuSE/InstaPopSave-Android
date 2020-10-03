@@ -7,17 +7,19 @@
     android:layout_height="240dp"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/myImageView"
-        android:layout_width="100dp"
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/frescoImageView"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_gravity="bottom|center_horizontal"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        tools:background="@color/c2_light33_grey"
+        android:visibility="visible"
+        tools:visibility="visible"
         tools:src="@tools:sample/avatars"
-        tools:visibility="visible" />
+        fresco:roundedCornerRadius="10dp"
+        fresco:placeholderImage="@color/c2_light2_grey"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

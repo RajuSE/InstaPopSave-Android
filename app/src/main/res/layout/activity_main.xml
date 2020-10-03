@@ -15,6 +15,7 @@
         android:layout_height="wrap_content" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
@@ -31,53 +32,76 @@
         android:layout_height="260dp"
         android:scaleType="centerCrop"
         android:src="@drawable/bags"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:layout_marginBottom="50dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
         android:text="Packing Cubes/Travel Pouch/Travel Organizer - Small, \nMedium, Large, and Slim, Grey"
-        android:textColor="#000"
         android:textAlignment="textStart"
+        android:textColor="#000"
+        android:layout_margin="15dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainImage" />
+        app:layout_constraintTop_toBottomOf="@+id/mainImage" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonImagevw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="40dp"
-        android:text="Add to Wishlist"
+        android:text="Add to Wishlist - ImageView"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <Button
+        android:id="@+id/buttonDrawee"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Add to Wishlist - Fresco"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="@+id/buttonImagevw"
+        app:layout_constraintStart_toStartOf="@+id/buttonImagevw"
+        app:layout_constraintTop_toBottomOf="@+id/buttonImagevw" />
+
+    <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp"
         android:text="Debug"
         android:textAllCaps="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <devx.insta.popsave.PopSave
         android:id="@+id/popSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topViewHome"
-        app:src_image="@drawable/ic_launcher_background" />
+       />
+
+    <devx.insta.popsave.PopSaveDrawee
+        android:id="@+id/popSaveDrawee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topViewHome"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
