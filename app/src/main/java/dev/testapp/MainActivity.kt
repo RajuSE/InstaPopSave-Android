@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 //            .setPopperImage(R.drawable.bags)//For local image.  For Remote image Use: "popSave?.imageView" and handle I/O
 //            .setPopperAreaSize(0, 500)
 //            .setPopperSize(130, 130)
-            .loadImage("http://raw.githubusercontent.com/RajuSE/InstaPopSave-Android/master/app/src/main/res/drawable/bags.jpg")
+            .loadImage("https://i.picsum.photos/id/41/200/300.jpg?hmac=oimmvNf5GBZCx44LN9J4KGnDqUvSWmmUwPcLUaUMxF0")
             .setOnFinishListener(object : PopSaveDrawee.OnFinish {
                 override fun onFinish() {
                     onAnimFinishUI()
