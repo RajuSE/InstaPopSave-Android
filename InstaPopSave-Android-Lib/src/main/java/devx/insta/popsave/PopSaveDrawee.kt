@@ -15,7 +15,9 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
+import java.lang.IllegalArgumentException
 
 
 class PopSaveDrawee
@@ -43,6 +45,9 @@ class PopSaveDrawee
     private fun init(context: Context, attributes: AttributeSet?) {
         attributes?.let { _ ->
 
+            if (!PopSaveSetup.isSetupDone) {
+                throw IllegalArgumentException("Please call PopSaveSetup.setup(context) in Application class")
+            }
             inflate(context, R.layout.layout_popsave_drawee, this)
             simpleDraweeView = findViewById(R.id.frescoImageView)
             simpleDraweeView?.visibility = View.GONE
@@ -126,6 +131,9 @@ class PopSaveDrawee
     }
 
     fun popNow() {
+        if (!PopSaveSetup.isSetupDone) {
+            throw IllegalArgumentException("Please call PopSaveSetup.setup(context) in Application class")
+        }
         simpleDraweeView!!.visibility = View.VISIBLE
         popSaveRoot!!.visibility = View.VISIBLE
 
