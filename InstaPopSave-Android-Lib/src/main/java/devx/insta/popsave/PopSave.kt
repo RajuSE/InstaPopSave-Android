@@ -129,7 +129,7 @@ class PopSave
             imageView!!.visibility = View.VISIBLE
             popSaveRoot!!.visibility = View.VISIBLE
 
-            PopSaveAnimUtils.pop(imageView, object : Animation.AnimationListener {
+            PopSaveAnimUtils.pop(imageView!!, object : Animation.AnimationListener {
                 override fun onAnimationStart(animation: Animation) {}
 
                 override fun onAnimationEnd(animation: Animation) {

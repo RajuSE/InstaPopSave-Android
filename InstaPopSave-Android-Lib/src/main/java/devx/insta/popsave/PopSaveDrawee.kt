@@ -137,7 +137,7 @@ class PopSaveDrawee
         simpleDraweeView!!.visibility = View.VISIBLE
         popSaveRoot!!.visibility = View.VISIBLE
 
-        PopSaveAnimUtils.pop(simpleDraweeView, object : Animation.AnimationListener {
+        PopSaveAnimUtils.pop(simpleDraweeView!!, object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation) {}
 
             override fun onAnimationEnd(animation: Animation) {
