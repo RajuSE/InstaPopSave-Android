@@ -13,7 +13,7 @@ ext {
 
     PUBLISH_GROUP_ID = 'devx.insta.popsave'
     PUBLISH_ARTIFACT_ID = 'InstaPopSave-Android'
-    PUBLISH_VERSION = '1.1.1'
+    PUBLISH_VERSION = '1.2.0'
 }
 
 /*
