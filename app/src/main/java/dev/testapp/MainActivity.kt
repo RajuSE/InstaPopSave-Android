@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import dev.android.R
 import devx.insta.popsave.PopSave
@@ -14,33 +13,50 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.top_bar_home.*
 
 class MainActivity : AppCompatActivity() {
-
     var isDebug = true
     var counter = 0
-    var imageUrl =
-        "https://coutloot-cdn.gumlet.com/listingImages/image_8ytm02si7hk_1601652244747.jpeg"
-    var isLoadFromDrawable = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        loadFromButton.setOnClickListener {
-            if (isLoadFromDrawable) {
-                isLoadFromDrawable = false
-                loadFromButton.text = "Load From Drawable"
-            } else {
-                isLoadFromDrawable = true
-                loadFromButton.text = "Load From Url"
-            }
-            reload()
-        }
+        popSaveDrawee
+//            .setPopperImage(R.drawable.bags)//For local image.  For Remote image Use: "popSave?.imageView" and handle I/O
+//            .setPopperAreaSize(0, 500)
+//            .setPopperSize(130, 130)
+            .loadImage("https://i.picsum.photos/id/41/200/300.jpg?hmac=oimmvNf5GBZCx44LN9J4KGnDqUvSWmmUwPcLUaUMxF0")
+            .setOnFinishListener(object : PopSaveDrawee.OnFinish {
+                override fun onFinish() {
+                    onAnimFinishUI()
+                }
+            })
 
-        button.setOnClickListener {
+        popSave
+            .setPopperImage(R.drawable.bags)//For local image.  For Remote image Use: "popSave?.imageView" and handle I/O
+//            .setPopperAreaSize(0, 500)
+//            .setPopperSize(130, 130)
+            //.loadImage not available Use: popSave.imageView object with Glide/Picasso etc
+            .setOnFinishListener(object : PopSave.OnFinish {
+                override fun onFinish() {
+                    onAnimFinishUI()
+                }
+            })
+
+
+        buttonImagevw.setOnClickListener {
+            popSave.visibility = View.VISIBLE
+            popSaveDrawee.visibility = View.GONE
             popSave.popNow()
         }
 
+        buttonDrawee.setOnClickListener {
+            popSave.visibility = View.GONE
+            popSaveDrawee.visibility = View.VISIBLE
+            popSaveDrawee.popNow()
+        }
+
         button2.setOnClickListener {
+            popSaveDrawee.highlightAreaToDebug(isDebug)
             popSave.highlightAreaToDebug(isDebug)
             if (isDebug == false) {
                 button2.setText("Release")
@@ -50,34 +66,19 @@ class MainActivity : AppCompatActivity() {
                 isDebug = false
             }
         }
+
     }
 
-    private fun reload() {
-        if (isLoadFromDrawable) {
-            mainImage.setImageResource(R.drawable.bags)
-            setUpPopSave(R.drawable.bags, "")
-        } else {
-            Glide.with(this)
-                .load(imageUrl)
-                .into(mainImage)
-            setUpPopSave(null, imageUrl)
-        }
+    private fun onAnimFinishUI() {
+        PopSaveAnimUtils.scaleUp(wishlistHome1)
+        Handler().postDelayed({
+            counter++
+            wishList_badge1.visibility = View.VISIBLE
+            wishList_badge1.text = "" + counter
+            PopSaveAnimUtils.scaleUp(wishList_badge1)
+        }, 800)
+        Snackbar.make(mainScreen, "Saved to Wishlist", Snackbar.LENGTH_LONG).show()
     }
 
-    private fun setUpPopSave(imageResource: Int?, imageUrl: String?) {
-        popSave.setPopperImage(imageResource ?: imageUrl!!)
-            .setPopperSize(130, 130)
-            .setOnFinishListener(object : PopSaveDrawee.OnFinish {
-                override fun onFinish() {
-                    PopSaveAnimUtils.scaleUp(wishlistHome1)
-                    Handler().postDelayed({
-                        counter++
-                        wishList_badge1.visibility = View.VISIBLE
-                        wishList_badge1.setText("" + counter)
-                        PopSaveAnimUtils.scaleUp(wishList_badge1)
-                    }, 800)
-                    Snackbar.make(mainScreen, "Saved to Wishlist", Snackbar.LENGTH_LONG).show()
-                }
-            })
-    }
+
 }

@@ -14,9 +14,9 @@
         android:layout_gravity="bottom|center_horizontal"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:visibility="gone"
         tools:background="@color/c2_light33_grey"
         tools:src="@tools:sample/avatars"
         tools:visibility="visible" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

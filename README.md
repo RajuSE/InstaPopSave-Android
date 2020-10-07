@@ -21,7 +21,7 @@ Screenshot shows how InstaPopSave was used for "Add to wishlist" interaction for
 Add this in your app's build.gradle file:
 ```groovy
 dependencies {
-  implementation 'devx.insta.popsave:InstaPopSave-Android:1.0.0'
+  implementation 'devx.insta.popsave:InstaPopSave-Android:1.2.0'
 }
 ```
 
@@ -31,13 +31,27 @@ Or add PopSave as a new dependency inside your pom.xml
 <dependency>
   <groupId>devx.insta.popsave</groupId>
   <artifactId>InstaPopSave-Android</artifactId>
-  <version>1.0.0</version>
+  <version>1.2.0</version>
   <type>pom</type>
 </dependency>
 ```
 
+
+also,
+declare internet permission.
+```xml
+    <uses-permission android:name="android.permission.INTERNET" />
+```
+
+
 ## ✔️ Changelog
 Changes exist in the [releases](https://github.com/RajuSE/InstaPopSave-Android/releases) tab.
+
+
+## 🦀Issues
+Contribute by notifying issues and suggestions 
+https://github.com/RajuSE/InstaPopSave-Android/issues
+
 
 ## 👨 Developed By
 
