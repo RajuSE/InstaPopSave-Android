@@ -1,6 +1,6 @@
 # 🔖 InstaPopSave-Android
 
-[ ![Download](https://api.bintray.com/packages/rajuse/InstaPopSave-Android/devx.insta.popsave/images/download.svg) ](https://bintray.com/rajuse/InstaPopSave-Android/devx.insta.popsave/_latestVersion) [![](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]() 
+[ ![Download](https://api.bintray.com/packages/rajuse/InstaPopSave-Android/devx.insta.popsave/images/download.svg) ](https://bintray.com/rajuse/InstaPopSave-Android/devx.insta.popsave/_latestVersion) [![](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]()  [![](https://rajuse.github.io/rajusegithub.svg)](https://github.com/RajuSE) [![](https://img.shields.io/badge/API-18%2B-brightgreen.svg?style=fla)](https://android-arsenal.com/api?level=18)
 
 <div align="left">
   <sub>Built with ❤︎ by
