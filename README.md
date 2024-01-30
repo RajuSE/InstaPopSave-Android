@@ -37,11 +37,6 @@ Or add PopSave as a new dependency inside your pom.xml
 ```
 
 
-also,
-declare internet permission.
-```xml
-    <uses-permission android:name="android.permission.INTERNET" />
-```
 
 
 ## ✔️ Changelog
