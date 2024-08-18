@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="c2_light1_grey">#f5f8f9</color>
+    <color name="c2_light2_grey">#EFF1F4</color>
+    <color name="c2_light22_grey">#FFDAD8D8</color>
+    <color name="c2_light3_grey">#d4d4d4</color>
+    <color name="c2_light33_grey">#ECECEC</color>
+    <color name="c2_light_red">#ff3651</color>
+    <color name="c2_dark1_grey">#c4c4c4</color>
+    <color name="green_debug">#2C54CA59</color>
+    <color name="blue">#2196F3</color>
+    <color name="violet">#9C27B0</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="indicator_light">#d4d5d9</color>
+    <color name="indicator_grey_dark">#A3A1A1</color>
+
+    <color name="transparent">#00000000</color>
+</resources>
