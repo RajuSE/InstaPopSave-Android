@@ -16,9 +16,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        flatDir {
+            dirs("libs")
+        }
     }
 }
 
-rootProject.name = "PopEffect"
+rootProject.name = "InstaPopSave-Android"
 include(":app")
 include(":instapopsave-android-lib")
